@@ -1,12 +1,29 @@
 module ExtensibleUnions
 
-export extensibleunion!, extensiblefunction!, addtounion!
+export addtounion!,
+       extensiblefunction!,
+       extensibleunion!,
+       isextensiblefunction,
+       isextensibleunion,
+       unioncontains
 
-const extensibleunionregistry = Dict{Any, Any}()
-const extensiblefunctionregistry = Dict{Any, Any}()
+const _registry_extensibleunion_to_genericfunctions = Dict{Any, Any}()
+const _registry_extensibleunion_to_members = Dict{Any, Any}()
+const _registry_genericfunctions_to_extensibleunions = Dict{Any, Any}()
+
+function __init__()
+    global _registry_extensibleunion_to_genericfunctions
+    global _registry_extensibleunion_to_members
+    global _registry_genericfunctions_to_extensibleunions
+    empty!(_registry_extensibleunion_to_genericfunctions)
+    empty!(_registry_extensibleunion_to_members)
+    empty!(_registry_genericfunctions_to_extensibleunions)
+    return nothing
+end
 
 function extensibleunion!(@nospecialize(u))
-    global extensibleunionregistry
+    global _registry_extensibleunion_to_genericfunctions
+    global _registry_extensibleunion_to_members
     if !isconcretetype(u)
         throw(ArgumentError("The provided type must be a concrete type"))
     end
@@ -19,15 +36,17 @@ function extensibleunion!(@nospecialize(u))
     if !isimmutable(u())
         throw(ArgumentError("The provided type must be an immutable type."))
     end
-    if !haskey(extensibleunionregistry, u)
-        extensibleunionregistry[u] = Set{Any}()
+    if !haskey(_registry_extensibleunion_to_members, u)
+        _registry_extensibleunion_to_genericfunctions[u] = Set{Any}()
+        _registry_extensibleunion_to_members[u] = Set{Any}()
     end
+    _update_all_methods_for_extensibleunion!(u)
     return u
 end
 
 function isextensibleunion(@nospecialize(u))
-    global extensibleunionregistry
-    return haskey(extensibleunionregistry, u)
+    global _registry_extensibleunion_to_members
+    return haskey(_registry_extensibleunion_to_members, u)
 end
 
 function extensiblefunction!(@nospecialize(f::Function), varargs...)
@@ -35,23 +54,26 @@ function extensiblefunction!(@nospecialize(f::Function), varargs...)
 end
 
 function extensiblefunction!(@nospecialize(f::Function), @nospecialize(varargs::Tuple))
-    global extensiblefunctionregistry
-    if !haskey(extensiblefunctionregistry, f)
-        extensiblefunctionregistry[f] = Set{Any}()
+    global _registry_extensibleunion_to_genericfunctions
+    global _registry_genericfunctions_to_extensibleunions
+    if !haskey(_registry_genericfunctions_to_extensibleunions, f)
+        _registry_genericfunctions_to_extensibleunions[f] = Set{Any}()
     end
     for i = 1:length(varargs)
         if isextensibleunion(varargs[i])
-            push!(extensiblefunctionregistry[f], varargs[i])
+            push!(_registry_extensibleunion_to_genericfunctions[varargs[i]], f)
+            push!(_registry_genericfunctions_to_extensibleunions[f], varargs[i])
         else
             throw(ArgumentError("Argument is not a registered extensible union."))
         end
     end
+    _update_all_methods_for_extensiblefunction!(f)
     return f
 end
 
 function isextensiblefunction(@nospecialize(f::Function))
-    global extensiblefunctionregistry
-    return haskey(extensiblefunctionregistry, f)
+    global _registry_genericfunctions_to_extensibleunions
+    return haskey(_registry_genericfunctions_to_extensibleunions, f)
 end
 
 function addtounion!(@nospecialize(u), varargs...)
@@ -59,23 +81,32 @@ function addtounion!(@nospecialize(u), varargs...)
 end
 
 function addtounion!(@nospecialize(u), @nospecialize(varargs::Tuple))
-    global extensibleunionregistry
+    global _registry_extensibleunion_to_members
     if isextensibleunion(u)
         for i = 1:length(varargs)
-            push!(extensibleunionregistry[u], varargs[i])
+            push!(_registry_extensibleunion_to_members[u], varargs[i])
         end
+    else
+        throw(ArgumentError("First argument must be a registered extensible union."))
+    end
+    _update_all_methods_for_extensibleunion!(u)
+end
+
+function unioncontains(@nospecialize(u), @nospecialize(t))
+    global _registry_extensibleunion_to_members
+    if isextensibleunion(u)
+        return t in _registry_extensibleunion_to_members[u]
     else
         throw(ArgumentError("First argument must be a registered extensible union."))
     end
 end
 
-function unioncontains(@nospecialize(u), @nospecialize(t))
-    global extensibleunionregistry
-    if isextensibleunion(u)
-        return t in extensibleunionregistry[u]
-    else
-        throw(ArgumentError("First argument must be a registered extensible union."))
-    end
+function _update_all_methods_for_extensiblefunction!(varargs...)
+    return nothing
+end
+
+function _update_all_methods_for_extensibleunion!(varargs...)
+    return nothing
 end
 
 # function jl_method_def(argdata::Core.SimpleVector, codeinfo::Core.CodeInfo, mod::Module)
