@@ -39,3 +39,7 @@ extensibleunion!(S7)
 @test !unioncontains(S7, String)
 addtounion!(S7, String)
 @test unioncontains(S7, String)
+
+struct S8 end
+@test_throws ArgumentError addtounion!(S8)
+@test_throws ArgumentError unioncontains!(S8, String)
