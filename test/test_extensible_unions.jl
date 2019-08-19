@@ -1,3 +1,6 @@
+using ExtensibleUnions
+using Test
+
 abstract type A1 end
 @test_throws ArgumentError extensibleunion!(A1)
 
