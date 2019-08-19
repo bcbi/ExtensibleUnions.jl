@@ -5,8 +5,8 @@ delete_merged_branches = true
 timeout_sec = 3600
 
 status = [
-    "codecov/patch",
-    "codecov/project",
+    # "codecov/patch",
+    # "codecov/project",
     "continuous-integration/travis-ci/push",
 ]
 
