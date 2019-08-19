@@ -34,7 +34,10 @@ function extensibleunion!(@nospecialize(u))
         throw(ArgumentError("The provided type must have no fields"))
     end
     if !isimmutable(u())
-        throw(ArgumentError("The provided type must be an immutable type."))
+        throw(ArgumentError("The provided type must be an immutable type"))
+    end
+    if !(supertype(u) === Any)
+        throw(ArgumentError("The immediate supertype of the provided type must be Any"))
     end
     if !haskey(_registry_extensibleunion_to_members, u)
         _registry_extensibleunion_to_genericfunctions[u] = Set{Any}()
@@ -50,7 +53,7 @@ function isextensibleunion(@nospecialize(u))
 end
 
 function extensiblefunction!(@nospecialize(f::Function), varargs...)
-    return extensiblefunction(f, varargs)
+    return extensiblefunction!(f, varargs)
 end
 
 function extensiblefunction!(@nospecialize(f::Function), @nospecialize(varargs::Tuple))
