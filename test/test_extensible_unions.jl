@@ -42,4 +42,4 @@ addtounion!(S7, String)
 
 struct S8 end
 @test_throws ArgumentError addtounion!(S8)
-@test_throws ArgumentError unioncontains!(S8, String)
+@test_throws ArgumentError unioncontains(S8, String)
