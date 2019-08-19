@@ -4,7 +4,7 @@ using Test
 @testset "ExtensibleUnions.jl" begin
     @testset "extensibleunion!" begin
         module extensibleunion
-        abstract type A
+        abstract type A end
         @test_throws ArgumentError extensibleunion!(A)
         @test_throws ArgumentError extensibleunion!(Int)
         struct B
