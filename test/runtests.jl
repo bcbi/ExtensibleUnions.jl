@@ -2,22 +2,16 @@ using ExtensibleUnions
 using Test
 
 @testset "ExtensibleUnions.jl" begin
-    @testset "extensibleunion!" begin
-        abstract type A
-        end
-        @test_throws ArgumentError extensibleunion!(A)
-        @test_throws ArgumentError extensibleunion!(Int)
-        struct B
-            x
-        end
-        @test_throws ArgumentError extensibleunion!(B)
-        mutable struct C
-        end
-        @test_throws ArgumentError extensibleunion!(C)
-        struct D
-        end
-        extensibleunion!(D)
-        extensibleunion!(D)
-        extensibleunion!(D)
+    @testset "test_codeinfo.jl" begin
+        include("test_codeinfo.jl")
+    end
+    @testset "test_extensible_functions.jl" begin
+        include("test_extensible_functions.jl")
+    end
+    @testset "test_extensible_unions.jl" begin
+        include("test_extensible_unions.jl")
+    end
+    @testset "test_update_methods.jl" begin
+        include("test_update_methods.jl")
     end
 end
