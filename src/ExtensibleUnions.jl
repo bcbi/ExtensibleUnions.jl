@@ -77,7 +77,7 @@ function isextensiblefunction(@nospecialize(f::Function))
 end
 
 function addtounion!(@nospecialize(u), varargs...)
-    return addtounion!(f, varargs)
+    return addtounion!(u, varargs)
 end
 
 function addtounion!(@nospecialize(u), @nospecialize(varargs::Tuple))
