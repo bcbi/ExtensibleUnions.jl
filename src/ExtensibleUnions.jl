@@ -11,6 +11,8 @@ const _registry_extensibleunion_to_genericfunctions = Dict{Any, Any}()
 const _registry_extensibleunion_to_members = Dict{Any, Any}()
 const _registry_genericfunctions_to_extensibleunions = Dict{Any, Any}()
 
+include("../ext/CodeTransformation/src/CodeTransformation.jl")
+
 include("codeinfo.jl")
 include("extensible_functions.jl")
 include("extensible_unions.jl")
