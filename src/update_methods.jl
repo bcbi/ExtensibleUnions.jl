@@ -32,11 +32,9 @@ function _update_single_method!(@nospecialize(f::Function),
             _set_to_union(_registry_extensibleunion_to_members[u]))
     end
     if oldsig == newsig
-        @warn("oldsig == newsig")
     else
         oldsig_tuple = tuple(oldsig.types[2:end]...)
         newsig_tuple = tuple(newsig.types[2:end]...)
-        @info("", oldsig_tuple, newsig_tuple)
         @assert length(code_lowered(f, oldsig_tuple)) == 1
         codeinfo = code_lowered(f, oldsig_tuple)[1]
         @assert length(methods(f, oldsig_tuple).ms) == 1
@@ -82,7 +80,6 @@ function _replace_types(sig::Type{<:Tuple}, p::Pair=nothing=>nothing)
 end
 
 function _replace_types(sig::Type, p::Pair=nothing=>nothing)
-    @info("", sig, p[1], p[2])
     if sig == p[1]
         return p[2]
     else

@@ -9,17 +9,17 @@ using Test
 @test ExtensibleUnions.getmodule(sin) === Base
 
 let
-    # Test example from docstring to addmethod!
+    # Test example from docstring to ExtensibleUnions.addmethod!
     g(x) = x + 13
     ci = code_lowered(g)[1]
     function f end
-    addmethod!(f, (Any,), ci)
+    ExtensibleUnions.addmethod!(f, (Any,), ci)
     @test f(1) === 14
 
     # Alternative syntax
     function f2 end
     @test ExtensibleUnions.makesig(f2, (Any,)) === Tuple{typeof(f2), Any}
-    addmethod!(Tuple{typeof(f2), Any}, ci)
+    ExtensibleUnions.addmethod!(Tuple{typeof(f2), Any}, ci)
     @test f2(1) === 14
 
 end
