@@ -1,5 +1,6 @@
 # ExtensibleUnions
 
+[![Bors enabled](https://bors.tech/images/badge_small.svg)](https://app.bors.tech/repositories/20023)
 [![Build Status](https://travis-ci.com/bcbi/ExtensibleUnions.jl.svg?branch=master)](https://travis-ci.com/bcbi/ExtensibleUnions.jl)
 [![Codecov](https://codecov.io/gh/bcbi/ExtensibleUnions.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/bcbi/ExtensibleUnions.jl)
 
