@@ -5,3 +5,6 @@ end
 function _update_all_methods_for_extensibleunion!(varargs...)
     return nothing
 end
+
+function _replace_types(AAAA, p::Pair)
+end

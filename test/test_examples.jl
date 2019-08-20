@@ -34,13 +34,12 @@ struct BlueColorTrait end
 extensibleunion!(RedColorTrait)
 extensibleunion!(BlueColorTrait)
 describe(x) = "I don't know what this is"
-extensiblefunction!(describe)
 describe(RedCar())
 describe(LadderTruck{Int}(1))
 describe(x::RedColorTrait) = "The color of this object is red"
-extensiblefunction!(describe)
+extensiblefunction!(describe, RedColorTrait)
 describe(x::BlueColorTrait) = "The color of this object is blue"
-extensiblefunction!(describe)
+extensiblefunction!(describe, BlueColorTrait)
 describe(RedCar())
 describe(LadderTruck{Int}(1))
 addtounion!(RedColorTrait, RedCar)
