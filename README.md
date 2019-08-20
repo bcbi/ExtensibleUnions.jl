@@ -7,7 +7,7 @@
 This is an experimental package that adds multiple inheritance to Julia in the
 form of extensible type unions.
 
-# Example usage
+## Example usage
 
 ```julia
 julia> using ExtensibleUnions
@@ -155,7 +155,7 @@ julia> describe(WaterTender{Int}(3,4))
 "The color of this object is red"
 ```
 
-# Acknowledgements
+## Acknowledgements
 
 Much of the code in this package is taken from:
 1. https://github.com/NHDaly/DeepcopyModules.jl (license: MIT)
