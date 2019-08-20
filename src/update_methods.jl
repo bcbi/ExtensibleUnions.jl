@@ -31,10 +31,11 @@ function _update_single_method!(@nospecialize(f::Function),
         newsig = _replace_types(newsig, u =>
             _set_to_union(_registry_extensibleunion_to_members[u]))
     end
-    @assert length(code_lowered(foo, oldsig)) == 1
-    codeinfo = code_lowered(foo, oldsig)[1]
-    @assert length(methods(f, oldsig)) == 1
-    oldmet = methods(f, oldsig)[1]
+    # @assert length(code_lowered(f, oldsig)) == 1
+    oldsig_tuple = tuple(oldsig.types[2:end]...)
+    codeinfo = code_lowered(f, oldsig_tuple)[1]
+    # @assert length(methods(f, oldsig_tuple)) == 1
+    oldmet = methods(f, oldsig_tuple)[1]
     if oldsig == newsig
         @warn("oldsig == newsig")
     else
