@@ -3,6 +3,9 @@
 [![Build Status](https://travis-ci.com/bcbi/ExtensibleUnions.jl.svg?branch=master)](https://travis-ci.com/bcbi/ExtensibleUnions.jl)
 [![Codecov](https://codecov.io/gh/bcbi/ExtensibleUnions.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/bcbi/ExtensibleUnions.jl)
 
+This is an experimental package that adds multiple inheritance to Julia in the
+form of extensible type unions.
+
 # Example usage
 
 ```julia
