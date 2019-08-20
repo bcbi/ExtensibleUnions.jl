@@ -28,7 +28,7 @@ function _update_single_method!(@nospecialize(f::Function),
     global _registry_extensibleunion_to_members
     newsig = _replace_types(oldsig, p)
     for u in unions
-        new_sig = _replace_types(new_sig, u =>
+        newsig = _replace_types(newsig, u =>
             _set_to_union(_registry_extensibleunion_to_members[u]))
     end
     @assert length(code_lowered(foo, oldsig)) == 1
