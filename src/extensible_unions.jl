@@ -19,7 +19,7 @@ function extensibleunion!(@nospecialize(u))
     end
     if !haskey(_registry_extensibleunion_to_members, u)
         _registry_extensibleunion_to_genericfunctions[u] = Set{Any}()
-        _registry_extensibleunion_to_members[u] = Set{Any}()
+        _registry_extensibleunion_to_members[u] = Set{Any}([u])
     end
     _update_all_methods_for_extensibleunion!(u)
     return u
@@ -37,14 +37,19 @@ end
 function addtounion!(@nospecialize(u), @nospecialize(varargs::Tuple))
     global _registry_extensibleunion_to_members
     if isextensibleunion(u)
+        old_members_set = deepcopy(_registry_extensibleunion_to_members[u])
         for i = 1:length(varargs)
             push!(_registry_extensibleunion_to_members[u], varargs[i])
         end
+        new_members_set = deepcopy(_registry_extensibleunion_to_members[u])
+        old_members_union = _set_to_union(old_members_set)
+        new_members_union = _set_to_union(new_members_set)
+        _update_all_methods_for_extensibleunion!(u, old_members_union =>
+                                                    new_members_union)
     else
         throw(ArgumentError(
             "First argument must be a registered extensible union."))
     end
-    _update_all_methods_for_extensibleunion!(u)
 end
 
 function unioncontains(@nospecialize(u), @nospecialize(t))
