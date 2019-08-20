@@ -27,43 +27,50 @@ extensibleunion!(BlueColorTrait)
 describe(x) = "I don't know anything about this object"
 
 methods(describe)
-describe(RedCar())
-describe(BlueCar(1))
-describe(LadderTruck{Int}(2))
-describe(WaterTender{Int}(3,4))
+@test length(methods(describe)) == 1
+@test describe(RedCar()) == "I don't know anything about this object"
+@test describe(BlueCar(1)) == "I don't know anything about this object"
+@test describe(LadderTruck{Int}(2)) == "I don't know anything about this object"
+@test describe(WaterTender{Int}(3,4)) == "I don't know anything about this object"
 
 describe(x::RedColorTrait) = "The color of this object is red"
 extensiblefunction!(describe, RedColorTrait)
+@test length(methods(describe)) == 2
 
 describe(x::BlueColorTrait) = "The color of this object is blue"
 extensiblefunction!(describe, BlueColorTrait)
+@test length(methods(describe)) == 3
 
 methods(describe)
-describe(RedCar())
-describe(BlueCar(1))
-describe(LadderTruck{Int}(2))
-describe(WaterTender{Int}(3,4))
+@test length(methods(describe)) == 3
+@test describe(RedCar()) == "I don't know anything about this object"
+@test describe(BlueCar(1)) == "I don't know anything about this object"
+@test describe(LadderTruck{Int}(2)) == "I don't know anything about this object"
+@test describe(WaterTender{Int}(3,4)) == "I don't know anything about this object"
 
 addtounion!(RedColorTrait, RedCar)
 
 methods(describe)
-describe(RedCar())
-describe(BlueCar(1))
-describe(LadderTruck{Int}(2))
-describe(WaterTender{Int}(3,4))
+@test length(methods(describe)) == 3
+@test describe(RedCar()) == "The color of this object is red"
+@test describe(BlueCar(1)) == "I don't know anything about this object"
+@test describe(LadderTruck{Int}(2)) == "I don't know anything about this object"
+@test describe(WaterTender{Int}(3,4)) == "I don't know anything about this object"
 
 addtounion!(BlueColorTrait, BlueCar)
 
 methods(describe)
-describe(RedCar())
-describe(BlueCar(1))
-describe(LadderTruck{Int}(2))
-describe(WaterTender{Int}(3,4))
+@test length(methods(describe)) == 3
+@test describe(RedCar()) == "The color of this object is red"
+@test describe(BlueCar(1)) == "The color of this object is blue"
+@test describe(LadderTruck{Int}(2)) == "I don't know anything about this object"
+@test describe(WaterTender{Int}(3,4)) == "I don't know anything about this object"
 
 addtounion!(RedColorTrait, AbstractFireEngine)
 
 methods(describe)
-describe(RedCar())
-describe(BlueCar(1))
-describe(LadderTruck{Int}(2))
-describe(WaterTender{Int}(3,4))
+@test length(methods(describe)) == 3
+@test describe(RedCar()) == "The color of this object is red"
+@test describe(BlueCar(1)) == "The color of this object is blue"
+@test describe(LadderTruck{Int}(2)) == "The color of this object is red"
+@test describe(WaterTender{Int}(3,4)) == "The color of this object is red"
