@@ -4,8 +4,7 @@ export addtounion!,
        extensiblefunction!,
        extensibleunion!,
        isextensiblefunction,
-       isextensibleunion,
-       unioncontains
+       isextensibleunion
 
 const _registry_extensibleunion_to_genericfunctions = Dict{Any, Any}()
 const _registry_extensibleunion_to_members = Dict{Any, Any}()
