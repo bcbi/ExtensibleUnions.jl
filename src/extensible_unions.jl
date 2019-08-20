@@ -10,7 +10,7 @@ function extensibleunion!(@nospecialize(u))
     if length(fieldnames(u)) > 0
         throw(ArgumentError("The provided type must have no fields"))
     end
-    if !isimmutable(u())
+    if u.mutable
         throw(ArgumentError("The provided type must be an immutable type"))
     end
     if !(supertype(u) === Any)
