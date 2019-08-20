@@ -40,7 +40,6 @@ describe(LadderTruck{Int}(1))
 describe(x::RedColorTrait) = "The color of this object is red"
 
 
-
 extensiblefunction!(describe, RedColorTrait)
 
 
