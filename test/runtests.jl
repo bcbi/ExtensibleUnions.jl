@@ -3,6 +3,9 @@ using Test
 
 @testset "ExtensibleUnions.jl" begin
     @testset "Unit tests" begin
+        @testset "test_code_transformation.jl" begin
+            include("test_code_transformation.jl")
+        end
         @testset "test_extensible_functions.jl" begin
             include("test_extensible_functions.jl")
         end
