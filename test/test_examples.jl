@@ -35,16 +35,25 @@ extensibleunion!(RedColorTrait)
 extensibleunion!(BlueColorTrait)
 describe(x) = "I don't know what this is"
 describe(RedCar())
+describe(BlueCar(1))
 describe(LadderTruck{Int}(1))
 describe(x::RedColorTrait) = "The color of this object is red"
+
+
+
 extensiblefunction!(describe, RedColorTrait)
+
+
 describe(x::BlueColorTrait) = "The color of this object is blue"
 extensiblefunction!(describe, BlueColorTrait)
 describe(RedCar())
-describe(LadderTruck{Int}(1))
+describe(BlueCar(1))
+describe(LadderTruck{Int}(2))
 addtounion!(RedColorTrait, RedCar)
 describe(RedCar())
-describe(LadderTruck{Int}(1))
-addtounion!(RedColorTrait, LadderTruck)
+describe(BlueCar(1))
+describe(LadderTruck{Int}(2))
+addtounion!(RedColorTrait, AbstractFireEngine)
 describe(RedCar())
-describe(LadderTruck{Int}(1))
+describe(BlueCar(1))
+describe(LadderTruck{Int}(2))

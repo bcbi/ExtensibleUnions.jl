@@ -31,18 +31,19 @@ function _update_single_method!(@nospecialize(f::Function),
         newsig = _replace_types(newsig, u =>
             _set_to_union(_registry_extensibleunion_to_members[u]))
     end
-    # @assert length(code_lowered(f, oldsig)) == 1
     oldsig_tuple = tuple(oldsig.types[2:end]...)
+    newsig_tuple = tuple(newsig.types[2:end]...)
+    # @assert length(code_lowered(f, oldsig)) == 1
     codeinfo = code_lowered(f, oldsig_tuple)[1]
-    # @assert length(methods(f, oldsig_tuple)) == 1
-    oldmet = methods(f, oldsig_tuple)[1]
+    # @assert length(methods(f, oldsig_tuple)).ms == 1
+    oldmet = methods(f, oldsig_tuple).ms[1]
     if oldsig == newsig
         @warn("oldsig == newsig")
     else
         @info("oldsig != newsig")
     end
     Base.delete_method(oldmet)
-    addmethod!(f, newsig, codeinfo)
+    addmethod!(f, newsig_tuple, codeinfo)
     return f
 end
 
