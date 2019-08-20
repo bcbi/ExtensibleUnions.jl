@@ -1,11 +1,15 @@
 using ExtensibleUnions
 using Test
 
+# All or almost all of the code in this file is taken from:
+# 1. https://github.com/NHDaly/DeepcopyModules.jl (license: MIT)
+# 2. https://github.com/perrutquist/CodeTransformation.jl (license: MIT)
+
 @test ExtensibleUnions.getmodule(typeof(sin)) === Base
 @test ExtensibleUnions.getmodule(sin) === Base
 
 let
-    # Test example from doctring to addmethod!
+    # Test example from docstring to addmethod!
     g(x) = x + 13
     ci = code_lowered(g)[1]
     function f end
