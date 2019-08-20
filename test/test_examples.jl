@@ -38,17 +38,17 @@ describe(RedCar())
 describe(BlueCar(1))
 describe(LadderTruck{Int}(1))
 describe(x::RedColorTrait) = "The color of this object is red"
-
-
 extensiblefunction!(describe, RedColorTrait)
-
-
 describe(x::BlueColorTrait) = "The color of this object is blue"
 extensiblefunction!(describe, BlueColorTrait)
 describe(RedCar())
 describe(BlueCar(1))
 describe(LadderTruck{Int}(2))
+
 addtounion!(RedColorTrait, RedCar)
+
+
+
 describe(RedCar())
 describe(BlueCar(1))
 describe(LadderTruck{Int}(2))

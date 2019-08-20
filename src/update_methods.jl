@@ -34,9 +34,9 @@ function _update_single_method!(@nospecialize(f::Function),
     if oldsig == newsig
         @warn("oldsig == newsig")
     else
-        @info("", oldsig_tuple, newsig_tuple)
         oldsig_tuple = tuple(oldsig.types[2:end]...)
         newsig_tuple = tuple(newsig.types[2:end]...)
+        @info("", oldsig_tuple, newsig_tuple)
         @assert length(code_lowered(f, oldsig_tuple)) == 1
         codeinfo = code_lowered(f, oldsig_tuple)[1]
         @assert length(methods(f, oldsig_tuple).ms) == 1
