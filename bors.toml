@@ -6,7 +6,7 @@ timeout_sec = 3600
 
 status = [
     "codecov/patch",
-    # "codecov/project",
+    "codecov/project",
     "continuous-integration/travis-ci/push",
 ]
 
