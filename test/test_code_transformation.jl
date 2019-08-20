@@ -28,7 +28,7 @@ let
     # Test example from docstring to codetransform!
     g(x) = x + 13
     function e end
-    codetransform!(g => e) do ci
+    ExtensibleUnions.codetransform!(g => e) do ci
         for ex in ci.code
             if ex isa Expr
                 map!(x -> x === 13 ? 7 : x, ex.args, ex.args)
