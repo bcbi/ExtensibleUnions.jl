@@ -63,13 +63,13 @@ function _replace_types(sig::Type{<:UnionAll}, p::Pair=nothing=>nothing)
     throw(MethodError("Not yet defined when sig is a UnionAll"))
 end
 
-function _replace_types(sig::Core.SimpleVector, p::Pair=nothing=>nothing)
-    v = Any[sig.types...]
-    for i = 2:length(v)
-        v[i] = _replace_types(v[i], p)
-    end
-    return Core.svec(v...)
-end
+# function _replace_types(sig::Core.SimpleVector, p::Pair=nothing=>nothing)
+#     v = Any[sig.types...]
+#     for i = 2:length(v)
+#         v[i] = _replace_types(v[i], p)
+#     end
+#     return Core.svec(v...)
+# end
 
 function _replace_types(sig::Type{<:Tuple}, p::Pair=nothing=>nothing)
     v = Any[sig.types...]

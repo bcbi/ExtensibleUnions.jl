@@ -1,4 +1,4 @@
-# All or almost all of the code in this file is taken from:
+# All or most of the code in this file is taken from:
 # 1. https://github.com/NHDaly/DeepcopyModules.jl (license: MIT)
 # 2. https://github.com/perrutquist/CodeTransformation.jl (license: MIT)
 
