@@ -41,9 +41,9 @@ function _update_single_method!(@nospecialize(f::Function),
         codeinfo = code_lowered(f, oldsig_tuple)[1]
         @assert length(methods(f, oldsig_tuple).ms) == 1
         oldmet = methods(f, oldsig_tuple).ms[1]
+        Base.delete_method(oldmet)
+        addmethod!(f, newsig_tuple, codeinfo)
     end
-    Base.delete_method(oldmet)
-    addmethod!(f, newsig_tuple, codeinfo)
     return f
 end
 
