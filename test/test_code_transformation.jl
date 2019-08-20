@@ -1,7 +1,7 @@
 using ExtensibleUnions
 using Test
 
-# All or almost all of the code in this file is taken from:
+# Most of the code in this file is taken from:
 # 1. https://github.com/NHDaly/DeepcopyModules.jl (license: MIT)
 # 2. https://github.com/perrutquist/CodeTransformation.jl (license: MIT)
 
@@ -38,4 +38,15 @@ let
     end
     @test e(1) === 8
     @test g(1) === 14
+end
+
+let
+    a = Vector{T} where T
+    b = ExtensibleUnions.typevars(a)
+    @test b isa Tuple
+    @test length(b) == 1
+    @test b[1] isa TypeVar
+    @test b[1].name == :T
+    @test b[1].lb === Union{}
+    @test b[1].ub === Any
 end
