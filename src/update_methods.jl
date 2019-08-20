@@ -44,6 +44,13 @@ function _update_single_method!(@nospecialize(met::Method),
     return met
 end
 
+# using ExtensibleUnions
+# foo(x::Float64) = "float 64"
+# ci = code_lowered(foo, (Float64,))[1]
+# met = methods(foo, (Float64,)).ms[1]
+# Base.delete_method(met)
+# ExtensibleUnions.CodeTransformation.addmethod!(foo, (String,), ci)
+
 function _update_single_method!(@nospecialize(met::Method),
                                 @nospecialize(oldsig::Type{<:UnionAll}),
                                 @nospecialize(unions::Set),
