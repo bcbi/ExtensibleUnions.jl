@@ -5,7 +5,7 @@
 [![Codecov](https://codecov.io/gh/bcbi/ExtensibleUnions.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/bcbi/ExtensibleUnions.jl)
 
 ```julia
-julia> Pkg.add("ExtensibleUnions")
+julia> import Pkg; Pkg.add("ExtensibleUnions")
 ```
 
 ExtensibleUnions is an experimental package that adds multiple inheritance to Julia in the
