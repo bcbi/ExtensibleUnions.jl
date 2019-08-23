@@ -1,10 +1,10 @@
 module ExtensibleUnions
 
-export addtounion!,
-       extensiblefunction!,
-       extensibleunion!,
-       isextensiblefunction,
-       isextensibleunion
+export addtounion!, # extensible_unions.jl
+       extensiblefunction!, # extensible_functions.jl
+       extensibleunion!, # extensible_unions.jl
+       isextensiblefunction, # extensible_functions.jl
+       isextensibleunion, # extensible_unions.jl
 
 const _registry_extensibleunion_to_genericfunctions = Dict{Any, Any}()
 const _registry_extensibleunion_to_members = Dict{Any, Any}()
