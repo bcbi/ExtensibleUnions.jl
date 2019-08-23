@@ -10,6 +10,7 @@ b = Type{Vector{T} where T}
 
 @test ExtensibleUnions._replace_types(Union{}) == Union{}
 @test ExtensibleUnions._replace_types(Union{}, Union{} => Union{Float32, String}) == Union{Float32, String}
+@test ExtensibleUnions._replace_types(Union{}, Union{Float32, String} => Union{Float32, Int32, String}) == Union{}
 @test ExtensibleUnions._replace_types(Union{Int32}) == Union{Int32}
 @test ExtensibleUnions._replace_types(Union{Int32}, Int32 => Float32) == Union{Float32}
 @test ExtensibleUnions._replace_types(Union{Int32, Float32}) == Union{Int32, Float32}
