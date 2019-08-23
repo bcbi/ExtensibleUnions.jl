@@ -72,6 +72,30 @@ function _replace_types(sig::Type{<:Tuple}, p::Pair=nothing=>nothing)
     return Tuple{v...}
 end
 
+_replace_types(::Type{Union{}}) = Union{}
+function _replace_types(sig::Type{Union{}}, p::Pair)
+    if sig == p[1]
+        return p[2]
+    else
+        return sig
+    end
+end
+
+function _replace_types(sig::Union, p::Pair=nothing=>nothing)
+    if sig == p[1]
+        return p[2]
+    else
+        union_length = Base.unionlen(sig)
+        old_union_members = Base.uniontypes(sig)
+        new_union_members = Vector{Any}(undef, union_length)
+        for i = 1:union_length
+            new_union_members[i] = _replace_types(old_union_members[i], p)
+        end
+        new_union = Union{new_union_members...}
+        return new_union
+    end
+end
+
 function _replace_types(sig::Type, p::Pair=nothing=>nothing)
     if sig == p[1]
         return p[2]
