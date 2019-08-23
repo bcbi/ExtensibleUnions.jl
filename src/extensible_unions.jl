@@ -52,7 +52,7 @@ function addtounion!(@nospecialize(u), @nospecialize(varargs::Tuple))
     end
 end
 
-function unioncontains(@nospecialize(u), @nospecialize(t))
+function unioncurrentlycontains(@nospecialize(u), @nospecialize(t))
     global _registry_extensibleunion_to_members
     if isextensibleunion(u)
         return t in _registry_extensibleunion_to_members[u]
