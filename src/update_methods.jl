@@ -149,7 +149,7 @@ function _replace_types(sig::Union)
     old_union_members = Base.uniontypes(sig)
     new_union_members = Vector{Any}(undef, union_length)
     for i = 1:union_length
-        new_union_members[i] = _replace_types(old_union_members[i], p)
+        new_union_members[i] = _replace_types(old_union_members[i])
     end
     new_union = Union{new_union_members...}
     return new_union
