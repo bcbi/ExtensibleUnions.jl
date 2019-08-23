@@ -1,6 +1,16 @@
 using ExtensibleUnions
 using Test
 
+macro genstruct!(list)
+    x = gensym()
+    y = quote
+        struct $(x)
+        end
+        push!($(list), $(x))
+    end
+    return y
+end
+
 @testset "ExtensibleUnions.jl" begin
     @testset "Unit tests" begin
         @testset "test_code_transformation.jl" begin
