@@ -2,10 +2,6 @@ block_labels = [ "DO NOT MERGE" ]
 
 delete_merged_branches = true
 
-pr_status = [
-    "Travis CI - Pull Request",
-]
-
 status = [
     "codecov/patch",
     "codecov/project",
