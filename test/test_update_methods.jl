@@ -52,12 +52,9 @@ f(x::BarTrait) = "bar"
 g(x::FooTrait) = "foo"
 extensiblefunction!(f, FooTrait, BarTrait)
 extensiblefunction!(f, (FooTrait, BarTrait,))
-extensiblefunction!(g, FooTrait)
-extensiblefunction!(g, (FooTrait,))
 ExtensibleUnions._update_all_methods_for_extensibleunion!(FooTrait)
 ExtensibleUnions._update_all_methods_for_extensibleunion!(BarTrait, nothing=>nothing)
 ExtensibleUnions._update_all_methods_for_extensiblefunction!(f)
-ExtensibleUnions._update_all_methods_for_extensiblefunction!(g, nothing=>nothing)
 addtounion!(FooTrait, StructA)
 addtounion!(FooTrait, StructB)
 addtounion!(FooTrait, StructC)
@@ -69,10 +66,7 @@ addtounion!(BarTrait, StructD)
 ExtensibleUnions._update_all_methods_for_extensibleunion!(FooTrait)
 ExtensibleUnions._update_all_methods_for_extensibleunion!(BarTrait, nothing=>nothing)
 ExtensibleUnions._update_all_methods_for_extensiblefunction!(f)
-ExtensibleUnions._update_all_methods_for_extensiblefunction!(g, nothing=>nothing)
 g(x::BarTrait) = "bar"
+ExtensibleUnions._registry_extensibleunion_to_genericfunctions
+ExtensibleUnions._registry_genericfunctions_to_extensibleunions
 ExtensibleUnions._update_single_method!(g, Tuple{BarTrait}, Set([BarTrait]))
-ExtensibleUnions._update_all_methods_for_extensibleunion!(FooTrait)
-ExtensibleUnions._update_all_methods_for_extensibleunion!(BarTrait, nothing=>nothing)
-ExtensibleUnions._update_all_methods_for_extensiblefunction!(f)
-ExtensibleUnions._update_all_methods_for_extensiblefunction!(g, nothing=>nothing)
