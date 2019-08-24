@@ -4,8 +4,16 @@ using Test
 macro genstruct!(list)
     x = gensym()
     y = quote
-        struct $(x)
-        end
+        struct $(x) end
+        push!($(list), $(x))
+    end
+    return y
+end
+
+macro genfunc!(list)
+    x = gensym()
+    y = quote
+        function $(x) end
         push!($(list), $(x))
     end
     return y
