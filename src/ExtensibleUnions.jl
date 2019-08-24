@@ -14,6 +14,7 @@ include("code_transformation.jl")
 include("extensible_functions.jl")
 include("extensible_unions.jl")
 include("init.jl")
+include("reset.jl")
 include("update_methods.jl")
 
 end # module
