@@ -6,7 +6,9 @@ ExtensibleUnions._update_all_methods_for_extensiblefunction!(f1)
 
 b = Type{Vector{T} where T}
 @test_throws MethodError ExtensibleUnions._update_single_method!(f1, b, Set())
+@test_throws MethodError ExtensibleUnions._update_single_method!(f1, b, Set(), nothing => nothing)
 @test_throws MethodError ExtensibleUnions._replace_types(b)
+@test_throws MethodError ExtensibleUnions._replace_types(b, nothing => nothing)
 
 @test ExtensibleUnions._replace_types(Union{}) == Union{}
 @test ExtensibleUnions._replace_types(Union{}, Union{} => Union{Float32, String}) == Union{Float32, String}
