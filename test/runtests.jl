@@ -39,4 +39,12 @@ end
             include("test_examples.jl")
         end
     end
+    @testset "reset.jl" begin
+        @testset "ExtensibleUnions._unsafe_reset!()" begin
+            ExtensibleUnions._unsafe_reset!()
+            @test isempty(ExtensibleUnions._registry_extensibleunion_to_genericfunctions)
+            @test isempty(ExtensibleUnions._registry_extensibleunion_to_members)
+            @test isempty(ExtensibleUnions._registry_genericfunctions_to_extensibleunions)
+        end
+    end
 end

@@ -30,26 +30,30 @@ structlist = Any[]
 @genstruct!(structlist)
 @genstruct!(structlist)
 @genstruct!(structlist)
-funclist = Any[]
-@genfunc!(funclist)
-@genfunc!(funclist)
+@genstruct!(structlist)
+# funclist = Any[]
+# @genfunc!(funclist)
+# @genfunc!(funclist)
 FooTrait = structlist[1]
 BarTrait = structlist[2]
+# BazTrait = structlist[3]
+struct BazTrait end
 extensibleunion!(FooTrait)
 extensibleunion!(BarTrait)
 ExtensibleUnions._update_all_methods_for_extensibleunion!(FooTrait)
 ExtensibleUnions._update_all_methods_for_extensibleunion!(BarTrait, nothing=>nothing)
-StructA = structlist[3]
-StructB = structlist[4]
-StructC = structlist[5]
-StructD = structlist[6]
+StructA = structlist[4]
+StructB = structlist[5]
+StructC = structlist[6]
+StructD = structlist[7]
+struct StructE end
+struct StructF end
 # f = funclist[1]
 # g = funclist[2]
 function f end
 function g end
 f(x::FooTrait) = "foo"
 f(x::BarTrait) = "bar"
-g(x::FooTrait) = "foo"
 extensiblefunction!(f, FooTrait, BarTrait)
 extensiblefunction!(f, (FooTrait, BarTrait,))
 ExtensibleUnions._update_all_methods_for_extensibleunion!(FooTrait)
@@ -66,7 +70,6 @@ addtounion!(BarTrait, StructD)
 ExtensibleUnions._update_all_methods_for_extensibleunion!(FooTrait)
 ExtensibleUnions._update_all_methods_for_extensibleunion!(BarTrait, nothing=>nothing)
 ExtensibleUnions._update_all_methods_for_extensiblefunction!(f)
-g(x::BarTrait) = "bar"
-ExtensibleUnions._registry_extensibleunion_to_genericfunctions
-ExtensibleUnions._registry_genericfunctions_to_extensibleunions
-ExtensibleUnions._update_single_method!(g, Tuple{BarTrait}, Set([BarTrait]))
+g(x::BazTrait) = "bar"
+ExtensibleUnions._registry_extensibleunion_to_members[BazTrait] = Set([StructE, StructF])
+ExtensibleUnions._update_single_method!(g, Tuple{BazTrait}, Set([BazTrait]))
