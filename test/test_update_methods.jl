@@ -70,6 +70,16 @@ addtounion!(BarTrait, StructD)
 ExtensibleUnions._update_all_methods_for_extensibleunion!(FooTrait)
 ExtensibleUnions._update_all_methods_for_extensibleunion!(BarTrait, nothing=>nothing)
 ExtensibleUnions._update_all_methods_for_extensiblefunction!(f)
-g(x::BazTrait) = "bar"
-ExtensibleUnions._registry_extensibleunion_to_members[BazTrait] = Set([StructE, StructF])
-ExtensibleUnions._update_single_method!(g, Tuple{BazTrait}, Set([BazTrait]))
+g(x::BazTrait) = "baz"
+ExtensibleUnions._registry_extensibleunion_to_members[BazTrait] = Set(Any[StructE, StructF])
+ExtensibleUnions._update_single_method!(g, Tuple{typeof(g), BazTrait}, Set(Any[BazTrait]))
+
+
+# using ExtensibleUnions
+# struct BazTrait end
+# struct StructE end
+# struct StructF end
+# function g end
+# g(x::BazTrait) = "baz"
+# ExtensibleUnions._registry_extensibleunion_to_members[BazTrait] = Set(Any[StructE, StructF])
+# ExtensibleUnions._update_single_method!(g, Tuple{typeof(g), BazTrait}, Set(Any[BazTrait]))

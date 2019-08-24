@@ -10,14 +10,14 @@ macro genstruct!(list)
     return y
 end
 
-macro genfunc!(list)
-    x = gensym()
-    y = quote
-        function $(x) end
-        push!($(list), $(x))
-    end
-    return y
-end
+# macro genfunc!(list)
+#     x = gensym()
+#     y = quote
+#         function $(x) end
+#         push!($(list), $(x))
+#     end
+#     return y
+# end
 
 @testset "ExtensibleUnions.jl" begin
     @testset "Unit tests" begin

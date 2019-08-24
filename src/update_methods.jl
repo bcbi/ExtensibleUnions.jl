@@ -46,7 +46,6 @@ function _update_single_method!(@nospecialize(f::Function),
         newsig = _replace_types(newsig, u =>
             _set_to_union(_registry_extensibleunion_to_members[u]))
     end
-    @info("", f, oldsig, newsig)
     if oldsig == newsig
     else
         oldsig_tuple = tuple(oldsig.types[2:end]...)
