@@ -13,7 +13,29 @@ form of extensible type unions.
 
 TODO: Make this package thread-safe.
 
-## Example usage
+## Usage
+
+Create a new extensible union:
+```julia
+struct MyUnion end
+extensibleunion!(MyUnion)
+```
+
+Add methods that dispatch on extensible unions:
+```julia
+f(x::MyUnion1, y, z, ...) = ...
+f(x, y::MyUnion2, z, ...) = ...
+extensiblefunction!(f, MyUnion1, MyUnion2, ...)
+```
+
+Add types to an extensible union:
+```julia
+addtounion!(MyUnion, SomeType1, SomeType2, ...) 
+```
+
+## Examples
+
+### Example 1
 
 ```julia
 julia> using ExtensibleUnions
