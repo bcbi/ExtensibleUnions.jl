@@ -30,7 +30,12 @@ extensiblefunction!(f, MyUnion1, MyUnion2, ...)
 
 Add types to an extensible union:
 ```julia
-addtounion!(MyUnion, SomeType1, SomeType2, ...) 
+addtounion!(MyUnion, SomeType1, SomeType2, ...)
+```
+
+At any later time, you can add more types to an extensible union:
+```julia
+addtounion!(MyUnion, SomeType3, SomeType4, ...)
 ```
 
 ## Examples
