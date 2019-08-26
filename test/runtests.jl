@@ -1,5 +1,6 @@
 using ExtensibleUnions
 using Test
+using Traceur
 
 macro genstruct!(list)
     x = gensym()
@@ -29,6 +30,12 @@ end
         end
         @testset "test_extensible_unions.jl" begin
             include("test_extensible_unions.jl")
+        end
+        @testset "test_inferred.jl" begin
+            include("test_inferred.jl")
+        end
+        @testset "test_traceur.jl" begin
+            include("test_traceur.jl")
         end
         @testset "test_update_methods.jl" begin
             include("test_update_methods.jl")
