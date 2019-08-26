@@ -5,9 +5,11 @@ version = "0.3.0-DEV"
 
 [compat]
 julia = "^1.1.0"
+Traceur = "^0.3.0"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+Traceur = "37b6cedf-1f77-55f8-9503-c64b63398394"
 
 [targets]
-test = ["Test"]
+test = ["Test", "Traceur"]
