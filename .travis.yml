@@ -13,12 +13,13 @@ os:
     # - osx
 
 julia:
-    - 1.1
-    # - nightly
+    - "1.2"
+    - nightly
 
 matrix:
     allow_failures:
         - julia: nightly
+        - os: osx
     fast_finish: true
 
 notifications:
