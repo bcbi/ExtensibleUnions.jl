@@ -1,7 +1,7 @@
 name = "ExtensibleUnions"
 uuid = "d387736e-c2c9-11e9-2eda-659a30e947ca"
 authors = ["Dilum Aluthge <dilum@aluthge.com>"]
-version = "0.3.0-DEV"
+version = "0.3.0"
 
 [compat]
 julia = "^1.1.0"
