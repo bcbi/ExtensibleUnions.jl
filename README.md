@@ -190,6 +190,10 @@ julia> describe(WaterTender{Int}(3,4))
 
 ## Acknowledgements
 
-Much of the code in this package is taken from:
-1. https://github.com/NHDaly/DeepcopyModules.jl (license: MIT)
-2. https://github.com/perrutquist/CodeTransformation.jl (license: MIT)
+Some of the code in this package is taken from:
+1. [https://github.com/NHDaly/DeepcopyModules.jl](https://github.com/NHDaly/DeepcopyModules.jl) (license: MIT)
+2. [https://github.com/perrutquist/CodeTransformation.jl](https://github.com/perrutquist/CodeTransformation.jl) (license: MIT)
+
+## Related Work
+
+1. [https://github.com/rofinn/Interfaces.jl](https://github.com/rofinn/Interfaces.jl): An implementation of interfaces for Julia
