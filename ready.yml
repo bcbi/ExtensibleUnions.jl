@@ -1,0 +1,17 @@
+maintainers:
+    - name: Dilum Aluthge
+      github_user: DilumAluthge
+
+docs_url:         https://github.com/bcbi/ExtensibleUnions.jl
+
+doi:              "10.5281/zenodo.3375535"
+
+repo:             ExtensibleUnions.jl
+
+repo_url:         https://github.com/bcbi/ExtensibleUnions.jl
+
+site_description: Abstract multiple inheritance in Julia via extensible type unions
+
+site_name:        ExtensibleUnions.jl
+
+type:             software
