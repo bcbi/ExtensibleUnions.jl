@@ -58,3 +58,11 @@ let
 
     @test foo(Foo()) == "boo!"
 end
+
+let
+    a = Vector{T} where T
+    ExtensibleUnions._replace_types(a)
+    ExtensibleUnions._replace_types(a.var)
+    ExtensibleUnions._replace_types(a, nothing => nothing)
+    ExtensibleUnions._replace_types(a.var, nothing => nothing)
+end
