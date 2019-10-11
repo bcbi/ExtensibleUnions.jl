@@ -127,7 +127,7 @@ end
 
 @inline _replace_types(sig::TypeVar)  = _replace_types(sig.ub)
 function _replace_types(sig::Type{<:Tuple})
-    v = Any[_peel_unionall(sig).parameters...]
+    v = Any[_peel_unionall(sig).types...]
     for i = 2:length(v)
         v[i] = _replace_types(v[i])
     end
@@ -135,8 +135,9 @@ function _replace_types(sig::Type{<:Tuple})
 end
 
 @inline _replace_types(sig::UnionAll, p::Pair) = _replace_types(sig.body, p)
+@inline _replace_types(sig::TypeVar,  p::Pair) = _replace_types(sig.ub,   p)
 function _replace_types(sig::Type{<:Tuple}, p::Pair)
-    v = Any[sig.types...]
+    v = Any[_peel_unionall(sig).types...]
     for i = 2:length(v)
         v[i] = _replace_types(v[i], p)
     end
