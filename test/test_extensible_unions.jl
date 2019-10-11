@@ -43,3 +43,26 @@ addtounion!(S7, String)
 struct S8 end
 @test_throws ArgumentError addtounion!(S8)
 @test_throws ArgumentError ExtensibleUnions.unioncurrentlycontains(S8, String)
+
+let
+    struct MyUnion end
+    extensibleunion!(MyUnion)
+
+    struct Foo end
+    addtounion!(MyUnion, Foo)
+
+    foo(x::Tuple{Int, T}) where {T} = x[1]
+
+    foo(::MyUnion) = "boo!"
+    extensiblefunction!(foo, MyUnion)
+
+    @test foo(Foo()) == "boo!"
+end
+
+let
+    a = Vector{T} where T
+    ExtensibleUnions._replace_types(a)
+    ExtensibleUnions._replace_types(a.var)
+    ExtensibleUnions._replace_types(a, nothing => nothing)
+    ExtensibleUnions._replace_types(a.var, nothing => nothing)
+end

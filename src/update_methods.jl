@@ -117,16 +117,27 @@ end
 #     end
 #     return Core.svec(v...)
 # end
+_peel_unionall(sig) = sig
+function _peel_unionall(sig::UnionAll)
+    while sig isa UnionAll
+        sig = sig.body
+    end
+    sig
+end
 
+@inline _replace_types(sig::TypeVar)  = _replace_types(sig.ub)
 function _replace_types(sig::Type{<:Tuple})
-    v = Any[sig.types...]
+    v = Any[_peel_unionall(sig).types...]
     for i = 2:length(v)
         v[i] = _replace_types(v[i])
     end
     return Tuple{v...}
 end
+
+@inline _replace_types(sig::UnionAll, p::Pair) = _replace_types(sig.body, p)
+@inline _replace_types(sig::TypeVar,  p::Pair) = _replace_types(sig.ub,   p)
 function _replace_types(sig::Type{<:Tuple}, p::Pair)
-    v = Any[sig.types...]
+    v = Any[_peel_unionall(sig).types...]
     for i = 2:length(v)
         v[i] = _replace_types(v[i], p)
     end
