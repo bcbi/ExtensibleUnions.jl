@@ -29,11 +29,23 @@ function isextensiblefunction(@nospecialize(f::Function))
     return haskey(_registry_genericfunctions_to_extensibleunions, f)
 end
 
-macro extensible(fdef, with, Us...)
-    @assert with == :with
+macro extensible(fdef)
+    ext_unions = Symbol[]
+    name  = fdef.args[1].args[1]
+    fargs = fdef.args[1].args[2:end]
+    for (i, arg) in enumerate(fargs)
+        if arg isa Expr && arg.head == :(::)
+            T = arg.args[end]
+            if T isa Expr && T.head == :braces && length(T.args) == 1
+                push!(ext_unions, T.args[1])
+                fdef.args[1].args[1+i].args[end] = T.args[1]
+            end
+        end
+    end
+    fdef
     quote
-        $fdef
-        extensiblefunction!($(fdef.args[1].args[1]), $(Us...))
+        $(fdef)
+        extensiblefunction!($name, $(ext_unions...))
     end |> esc
 end
 

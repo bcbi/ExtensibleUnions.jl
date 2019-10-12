@@ -22,9 +22,10 @@ Create a new extensible union:
 
 Add methods that dispatch on extensible unions:
 ```julia
-@extensible f(x::MyUnion1, y, z, ...) = ... with MyUnion1
-@extensible f(x, y::MyUnion2, z, ...) = ... with MyUnion2
+@extensible f(x::{MyUnion1}, y, z, ...) = ...
+@extensible f(x, y::{MyUnion2}, z, ...) = ...
 ```
+Curly braces in the macro denote an extensible union.
 
 Add types to an extensible union:
 ```julia
@@ -86,10 +87,10 @@ julia> describe(LadderTruck{Int}(2))
 julia> describe(WaterTender{Int}(3,4))
 "I don't know anything about this object"
 
-julia> @extensible describe(x::RedColorTrait) = "The color of this object is red" with RedColorTrait
+julia> @extensible describe(x::{RedColorTrait}) = "The color of this object is red"
 describe (generic function with 2 methods)
 
-julia> @extensible describe(x::BlueColorTrait) = "The color of this object is blue" with BlueColorTrait
+julia> @extensible describe(x::{BlueColorTrait}) = "The color of this object is blue"
 describe (generic function with 3 methods)
 
 julia> methods(describe)
