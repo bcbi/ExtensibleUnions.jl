@@ -1,3 +1,29 @@
+abstract type ExtensibleUnion end
+
+members(::Type{U}) where {U<:ExtensibleUnion} =
+    collect(ExtensibleUnions._registry_extensibleunion_to_members[U])[2:end]
+
+function Base.show(io::IO, ::Type{U}) where {U <: ExtensibleUnion}
+    membs = members(U)
+    print(io, "Extensible Union $((string ∘ nameof)(U)) with ")
+    if isempty(membs)
+        print(io, "no members")
+    else
+        print(io, "members: $(membs[1])")
+        for memb in membs[2:end]
+            print(io, ", $(memb)")
+        end
+    end
+    print(io, ".")
+end
+
+macro ExtensibleUnion(T)
+    quote
+        struct $T <: ExtensibleUnion end
+        extensibleunion!($T)
+    end |> esc
+end
+
 function extensibleunion!(@nospecialize(u))
     global _registry_extensibleunion_to_genericfunctions
     global _registry_extensibleunion_to_members
@@ -13,7 +39,7 @@ function extensibleunion!(@nospecialize(u))
     if u.mutable
         throw(ArgumentError("The provided type must be an immutable type"))
     end
-    if !(supertype(u) === Any)
+    if !(supertype(u) === ExtensibleUnion)
         throw(ArgumentError(
             "The immediate supertype of the provided type must be Any"))
     end

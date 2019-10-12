@@ -1,7 +1,7 @@
 using ExtensibleUnions
 using Test
 
-struct S5 end
+struct S5 <: ExtensibleUnion end
 function f1 end
 @test !isextensibleunion(S5)
 @test !isextensiblefunction(f1)

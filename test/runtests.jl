@@ -2,6 +2,15 @@ using ExtensibleUnions
 using Test
 using Traceur
 
+macro genstruct!(list, super)
+    x = gensym()
+    y = quote
+        struct $(x) <: $super end
+        push!($(list), $(x))
+    end
+    return y
+end
+
 macro genstruct!(list)
     x = gensym()
     y = quote

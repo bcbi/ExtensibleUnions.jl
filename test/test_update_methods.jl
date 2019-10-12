@@ -26,9 +26,9 @@ b = Type{Vector{T} where T}
 @test ExtensibleUnions._replace_types(Union{Int32, Float32, AbstractString, Symbol}, Union{Int32, Float32, AbstractString, Symbol} => Union{Int32, Float32, AbstractString, Symbol, Char}) == Union{Int32, Float32, AbstractString, Symbol, Char}
 
 structlist = Any[]
-@genstruct!(structlist)
-@genstruct!(structlist)
-@genstruct!(structlist)
+@genstruct!(structlist, ExtensibleUnion)
+@genstruct!(structlist, ExtensibleUnion)
+@genstruct!(structlist, ExtensibleUnion)
 @genstruct!(structlist)
 @genstruct!(structlist)
 @genstruct!(structlist)

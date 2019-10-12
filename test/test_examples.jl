@@ -19,11 +19,8 @@ mutable struct WaterTender{T} <: AbstractFireEngine
     y::T
 end
 
-struct RedColorTrait end
-struct BlueColorTrait end
-
-extensibleunion!(RedColorTrait)
-extensibleunion!(BlueColorTrait)
+@ExtensibleUnion RedColorTrait
+@ExtensibleUnion BlueColorTrait
 
 describe(x) = "I don't know anything about this object"
 

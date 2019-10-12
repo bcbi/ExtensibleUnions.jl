@@ -17,8 +17,7 @@ TODO: Make this package thread-safe.
 
 Create a new extensible union:
 ```julia
-struct MyUnion end
-extensibleunion!(MyUnion)
+@ExtensibleUnion MyUnion
 ```
 
 Add methods that dispatch on extensible unions:
@@ -65,15 +64,9 @@ julia> mutable struct WaterTender{T} <: AbstractFireEngine
            y::T
        end
 
-julia> struct RedColorTrait end
+julia> @ExtensibleUnion RedColorTrait;
 
-julia> struct BlueColorTrait end
-
-julia> extensibleunion!(RedColorTrait)
-RedColorTrait
-
-julia> extensibleunion!(BlueColorTrait)
-BlueColorTrait
+julia> @ExtensibleUnion BlueColorTrait;
 
 julia> describe(x) = "I don't know anything about this object"
 describe (generic function with 1 method)
