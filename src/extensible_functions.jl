@@ -30,7 +30,7 @@ function isextensiblefunction(@nospecialize(f::Function))
 end
 
 macro extensible(fdef)
-    @assert fdef.head = :(=) || fdef.head == :(:function)
+    @assert fdef.head == :(=) || fdef.head == :(:function)
     ext_unions = Symbol[]
     name  = fdef.args[1].args[1]
     fargs = fdef.args[1].args[2:end]
