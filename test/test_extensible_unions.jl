@@ -50,8 +50,7 @@ let
 
     foo(x::Tuple{Int, T}) where {T} = x[1]
 
-    foo(::S9) = "boo!"
-    extensiblefunction!(foo, S9)
+    @extensible foo(::S9) = "boo!" with S9
 
     @test foo(S10())  == "boo!"
     @test members(S9) == [S10]

@@ -28,3 +28,14 @@ function isextensiblefunction(@nospecialize(f::Function))
     global _registry_genericfunctions_to_extensibleunions
     return haskey(_registry_genericfunctions_to_extensibleunions, f)
 end
+
+macro extensible(fdef, with, Us...)
+    @assert with == :with
+    quote
+        $fdef
+        extensiblefunction!($(fdef.args[1].args[1]), $(Us...))
+    end |> esc
+end
+
+
+

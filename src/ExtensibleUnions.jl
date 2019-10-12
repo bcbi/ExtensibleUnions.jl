@@ -7,6 +7,7 @@ export addtounion!, # extensible_unions.jl
        ExtensibleUnion,  # extensible_unions.jl
        members,          # extensible_unions.jl
        isextensiblefunction, # extensible_functions.jl
+       @extensible,      # extensible_functions.jl
        isextensibleunion # extensible_unions.jl
 
 const _registry_extensibleunion_to_genericfunctions = Dict{Any, Any}()
