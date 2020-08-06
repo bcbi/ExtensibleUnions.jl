@@ -1,6 +1,5 @@
 # ExtensibleUnions
 
-[![Bors enabled](https://bors.tech/images/badge_small.svg)](https://app.bors.tech/repositories/20023)
 [![Build Status](https://travis-ci.com/bcbi/ExtensibleUnions.jl.svg?branch=master)](https://travis-ci.com/bcbi/ExtensibleUnions.jl/branches)
 [![Codecov](https://codecov.io/gh/bcbi/ExtensibleUnions.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/bcbi/ExtensibleUnions.jl)
 
@@ -9,7 +8,7 @@ julia> import Pkg; Pkg.add("ExtensibleUnions")
 ```
 
 ExtensibleUnions is an experimental package that adds abstract multiple inheritance to Julia in the
-form of extensible type unions.
+form of extensible (mutable) type unions.
 
 TODO: Make this package thread-safe.
 
