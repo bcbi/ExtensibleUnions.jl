@@ -7,10 +7,10 @@
 julia> import Pkg; Pkg.add("ExtensibleUnions")
 ```
 
-ExtensibleUnions is an experimental package that adds abstract multiple inheritance to Julia in the
+ExtensibleUnions adds abstract multiple inheritance to Julia in the
 form of extensible (mutable) type unions.
 
-TODO: Make this package thread-safe.
+**Warning: ExtensibleUnions is an experimental package. Do not use ExtensibleUnions in any production code.**
 
 ## Usage
 
